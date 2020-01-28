@@ -5,6 +5,7 @@ const controller = {
     get_return_values : (req , res) => {
         const credential = _.pick(req.body , 
                     ['input_name' , 'file_content','output_name']) ;
+        console.log(credential)
         
     }
 };

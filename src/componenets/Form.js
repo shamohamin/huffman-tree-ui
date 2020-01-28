@@ -22,17 +22,7 @@ export class Form extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="container">
-                        <div className="form-group">
-                            <label className="m-1" htmlFor="context">content:</label>
-                            <div>
-                                <textarea type="textbox" className="m-2 p-3"
-                                    name="file_content" rows="5" cols="94" id="context"
-                                    onChange={event => this.props.onChange(event)}></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <button onClick={this.props.onSubmit} className="btn btn-primary"> 
+                    <button onClick={this.props.onSubmit} className="btn ml-3 btn-primary"> 
                         Compress 
                     </button>
                 </div>

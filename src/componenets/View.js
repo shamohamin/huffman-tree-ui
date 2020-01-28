@@ -2,13 +2,14 @@ import React from 'react'
 import { HOC } from './HOC' 
 import { Form } from "./Form";
 import { SubmitedtShow } from './SubmitedShow'
+import { sendRequest } from "./sendRequest";
 
 export class View extends React.Component {
     constructor(props){
         super(props) ;
 
+        this.url = "http://localhost:3600/api/name"
         this.state = {
-            file_content : "" ,
             input_name : "" ,
             output_name : "" ,
             toggle : false ,
@@ -20,11 +21,14 @@ export class View extends React.Component {
     }
 
     onChange = (event) => this.setState({[event.target.name] : event.target.value}) 
-    onSubmit = () => this.setState({toggle : true})
+    onSubmit = () => sendRequest("post" , this.url , this.state)
+    .then(res => {
+        console.log(res)
+        this.setState({toggle : true})
+    })
+    .catch(err => console.log(err))
 
     render(){
-        console.log(this.state)
-
         return  HOC(Form , SubmitedtShow , this.state.toggle , this.state ,
                         {onChange:this.onChange , onSubmit:this.onSubmit}) ;
     }
