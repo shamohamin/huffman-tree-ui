@@ -33,28 +33,31 @@ int main(int argc , char *argv[]){
     // glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH | GLUT_DOUBLE);
     // glutInitWindowSize(2000,2000);
     // glutCreateWindow("Huffman Tree");
+    input_file += "/home/amin/Documents/huffman-tree-ui/huffman_tree/";
+    output_file += "/home/amin/Documents/huffman-tree-ui/huffman_tree/";
 
     char *hold = &argv[1][0] ;
     for(;*hold != '\0';hold++)
         input_file += *hold ;
-    
+
     hold = &argv[2][0] ;
     for(;*hold != '\0' ; hold++)
         output_file += *hold;
     
     input_file += ".txt" ;
     output_file += ".txt" ;
-    
+
     reading_from_file() ;
+    
     int size_of_total = 0 ;
     int size_of_compressed_file = 0 ;
     ::root = compress(size_of_total , size_of_compressed_file) ;
     size_of_total *= 8 ;
-    cout << size_of_total << " size of all the bits" << endl ;
-    cout << size_of_compressed_file << " size of comprssed FILE" << endl ;
+    cout << size_of_total << endl ;
+    cout << size_of_compressed_file << endl ;
     
     double precent = (double)size_of_compressed_file / (double)size_of_total ;
-    cout << "precent is : " << precent << endl ;
+    cout << precent << endl ;
 
     try{
         decompressed() ;

@@ -12,7 +12,8 @@ export const HOC = (FormComponent , ToggleComponenet , toggle ,state ,{onChange 
     return <div style={inlineStyle}>
         {
             toggle ? <ToggleComponenet {...state} /> : 
-                        <FormComponent onChange={onChange} onSubmit={onSubmit}/> 
+                        <FormComponent onChange={onChange} 
+                                onSubmit={onSubmit} input_name_arr={state.input_name_arr}/> 
         }
     </div>
 }

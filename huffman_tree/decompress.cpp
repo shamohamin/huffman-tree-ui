@@ -24,7 +24,7 @@ void decompressed(){
         cout << e ;
     }
         
-    ofstream file ("decompressed.txt") ;
+    ofstream file ("/home/amin/Documents/huffman-tree-ui/huffman_tree/decompressed.txt") ;
     if(file.is_open())
         for(int i = 0 ; i < _line_holder.size() ; i++)
             make_decompressed_file(_line_holder.at(i) , file) , file << endl ;

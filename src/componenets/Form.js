@@ -12,8 +12,17 @@ export class Form extends React.Component {
                         <div className="row">
                             <div className="col p-2 m-2">
                             Input Name :
-                                <input type="text" className="form-control" name="input_name"
-                                            onChange={(event) => this.props.onChange(event)} />
+                                <select name="input_name"  value={this.props.input_name} className="form-control"
+                                    onClick={(event) => this.props.onChange(event)}>
+                                        {
+                                            this.props.input_name_arr.map(item => <option value={item} key={item}>
+                                                {item}
+                                            </option>)
+                                        }
+                                </select>
+
+                                {/* <input type="text" className="form-control" name="input_name"
+                                            onChange={(event) => this.props.onChange(event)} /> */}
                             </div>
                             <div className="col p-2 m-2">
                             Output Name :
