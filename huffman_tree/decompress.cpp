@@ -5,11 +5,16 @@
 #include <ctype.h>
 #include <vector>
 #include <iterator>
+#include "header.h"
+#include "chilkat/include/CkCrypt2.h"
+#include "chilkat/include/CkGlobal.h"
 using namespace std ;
 
 map <string , char> _code_map ;
 vector<string> _line_holder;
 extern string output_file ;
+const char * HASHkey = 
+        "000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F";
 
 void read_file();
 void make_map(string) ;
@@ -17,6 +22,29 @@ void make_decompressed_file(string line , ofstream &file);
 
 
 void decompressed(){
+
+    CkCrypt2 crypt ;
+
+    crypt.put_CryptAlgorithm("eas") ;
+    crypt.put_KeyLength(256);
+    crypt.put_PaddingScheme(0);
+    crypt.SetEncodedKey(HASHkey,"hex");
+
+    CkGlobal glob;
+    bool success = glob.UnlockBundle("Anything for 30-day trial");
+    if (success != true) {
+        std::cout << glob.lastErrorText() << "\r\n";
+        return;
+    }
+
+    int status = glob.get_UnlockStatus();
+
+    string inFile = "/home/amin/Documents/huffman-tree-ui/huffman_tree/compressed.txt.en";
+    string outFile = output_file;
+    success = crypt.CkDecryptFile(&inFile.at(0),&outFile.at(0));
+    if(!success)
+        cout << crypt.lastErrorText() << endl ;
+
 
     try{
         read_file();

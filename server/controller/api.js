@@ -10,10 +10,14 @@ const controller = {
             (error , stdout , stderr) => {
                 if(error)
                     res.status(500).send(error) 
-                if(stdout)
+                if(stdout){
+                    console.log(stdout)
                     res.status(200).send(stdout)
-                if(stderr)
-                    res.status(500).send(err)
+                }
+                if(stderr){
+                    console.log(stderr)
+                    res.status(500).send(stderr)
+                }
                 });
         
     },

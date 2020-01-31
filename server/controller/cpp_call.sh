@@ -1,7 +1,9 @@
 #!/bin/bash
 
-make=`make --directory=./huffman_tree/`
+make=`make --directory=~/Documents/huffman-tree-ui/huffman_tree`
 
-res=`./huffman_tree/a.out $1 $2`
+# echo $make 
+
+res=`~/Documents/huffman-tree-ui/huffman_tree/a.out $1 $2`
 
 echo $res

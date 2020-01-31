@@ -7,7 +7,12 @@
 #include <string.h>
 #include <fstream>
 #include <ostream>
+#include "chilkat/include/CkCrypt2.h"
+#include "chilkat/include/CkGlobal.h"
 using namespace std;
+
+const char *HASHkeyy =
+        "000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F" ;
 
 struct char_freq ;
 struct node ;
@@ -145,8 +150,31 @@ void make_compress_file(){
     else
         cout << "Unable to open file"; 
 
+    CkCrypt2 crypt ;
+
+    crypt.put_CryptAlgorithm("eas") ;
+    crypt.put_KeyLength(256);
+    crypt.put_PaddingScheme(0);
+    crypt.SetEncodedKey(HASHkeyy,"hex");
+
+    CkGlobal glob;
+    bool success = glob.UnlockBundle("Anything for 30-day trial");
+    if (success != true) {
+        std::cout << glob.lastErrorText() << "\r\n";
+        return;
+    }
+
+    glob.get_UnlockStatus();
+
     myfile.close();
     compress_file.close() ;    
+    string inFile = output_file;
+    string outFile = "/home/amin/Documents/huffman-tree-ui/huffman_tree/compressed.txt.en" ;
+
+    success = crypt.CkEncryptFile(&inFile.at(0),&outFile.at(0));
+    if(!success)
+        cout << "hello " <<  crypt.lastErrorText() << endl;
+    remove(&output_file.at(0)) ;   
 }
 
 void convert_char_to_code(string line , ofstream &file){
